@@ -222,7 +222,6 @@ class Account
     private function insertUserDetails(string $firstName, string $lastName, string $username, string $email, string $password): bool
     {
         $password = hash("sha512", $password);
-        $profilePic = "assets/images/profile-pics/head_emerald.png";
         $date = date("Y-m-d");
 
         $query = $this->conn->prepare("INSERT INTO user (first_name, last_name, user_name, email, password, sign_up_date) VALUES (:firstName, :lastName, :username, :email, :password, :date)");
@@ -234,5 +233,30 @@ class Account
         $query->bindValue(":date", $date);
 
         return $query->execute();
+    }
+    /**
+     *  Login user
+     * 
+     * @param string $username
+     * @param string $password
+     * 
+     * @return bool
+     */
+
+    public function login(string $username, string $password): bool
+    {
+        $password = hash("sha512", $password);
+
+        $query = $this->conn->prepare("SELECT * FROM user WHERE user_name = :username AND password = :password");
+        $query->bindValue(":username", $username);
+        $query->bindValue(":password", $password);
+
+        $query->execute();
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+        array_push($this->errorArray, Constants::$loginFailed);
+        return false;
     }
 }
