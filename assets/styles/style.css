@@ -116,6 +116,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 2rem;
+    object-fit: center;
 }
 
 .preview_image,

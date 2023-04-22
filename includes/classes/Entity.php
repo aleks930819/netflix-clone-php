@@ -8,7 +8,7 @@ class Entity
     private $conn;
 
     /**
-     * @var $input - int or object
+     * @var $input - int || object || string
      */
     private $input;
 
@@ -17,7 +17,7 @@ class Entity
      * 
      * @param $conn - database connection
      * 
-     * @param $input - int or object 
+     * @param $input - int || object || string 
      * 
      */
     public function __construct($conn, $input)
@@ -33,15 +33,13 @@ class Entity
 
             $this->input = $query->fetch(PDO::FETCH_ASSOC);
         }
-
-        $this->input = $input;
     }
 
 
     /**
      *  Get the id of the entity
      * 
-     *  @return int - id
+     *  @return int  - string
      */
 
     public function getId(): int
@@ -81,6 +79,4 @@ class Entity
     {
         return $this->input["preview"];
     }
-
-    
 }

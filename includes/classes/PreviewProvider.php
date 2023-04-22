@@ -41,6 +41,7 @@ class PreviewProvider
 
     public function createPreviewVideo($entity)
     {
+
         if ($entity == null) {
             $entity = $this->getRandomEntity();
         }
@@ -49,6 +50,7 @@ class PreviewProvider
         $name = $entity->getName();
         $preview = $entity->getPreview();
         $thumbnail = $entity->getThumbnail();
+
 
 
 
@@ -85,6 +87,8 @@ class PreviewProvider
 
     public function createEntityPreviewSquare($entity): string
     {
+
+        
         $id = $entity->getId();
         $thumbnail = $entity->getThumbnail();
         $name = $entity->getName();
@@ -109,9 +113,9 @@ class PreviewProvider
 
     private function getRandomEntity(): Entity
     {
-        $entety = EntityProvider::getEntities($this->conn, null, 1);
+        $entity = EntityProvider::getEntities($this->conn, null, 1);
 
 
-        return $entety[0];
+        return $entity[0];
     }
 }
