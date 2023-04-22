@@ -47,4 +47,71 @@ class Video
         }
         $this->entity = new Entity($this->conn, $this->input['entityId']);
     }
+
+
+    /**
+     *  Get the id of the video
+     * 
+     *  @return int  - string
+     */
+
+    public function getId(): int
+    {
+        return $this->input["id"];
+    }
+
+    /**
+     *  Get the title of the video
+     * 
+     *  @return string - name
+     */
+
+    public function getTitle(): string
+    {
+        return $this->input["title"];
+    }
+
+    /**
+     *  Get the description of the video
+     * 
+     *  @return string - description
+     */
+
+    public function getDescription(): string
+    {
+        return $this->input["description"];
+    }
+
+    /**
+     *  Get the filepath of the video
+     * 
+     *  @return string - filepath
+     */
+
+    public function getFilePath(): string
+    {
+        return $this->input["filePath"];
+    }
+
+    /**
+     *  Get the thumbnail of the video
+     * 
+     *  @return string - thumbnail
+     */
+
+    public function getThumbnail(): string
+    {
+        return $this->entity->getThumbnail();
+    }
+
+    /**
+     *  Get the episode number 
+     * 
+     *  @return string - episode number
+     */
+
+    public function getEpisodeNumber(): string
+    {
+        return $this->input["episode"];
+    }
 }
