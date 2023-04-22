@@ -108,4 +108,26 @@ class CategoryContainer
         </div>
         ";
     }
+
+
+    public function showCategory($categoryId, $title = null)
+    {
+        $query = $this->conn->prepare("SELECT * FROM categories WHERE id=:id");
+        $query->bindValue(":id", $categoryId);
+        $query->execute();
+
+        $html = "<div class='preview_categories'>";
+
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $html .= $this->getCategoryHtml(
+                $row,
+                $title,
+                true,
+                true
+            );
+        }
+
+
+        return $html . "</div>";
+    }
 }

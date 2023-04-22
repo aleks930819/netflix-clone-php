@@ -81,6 +81,17 @@ class Entity
     }
 
     /**
+     *  Get the id of the category of the entity
+     * 
+     *  @return int - category id
+     */
+
+    public function getCategoryId(): int
+    {
+        return $this->input["categoryId"];
+    }
+
+    /**
      *  Get the category of the entity
      * 
      *  @return array - category

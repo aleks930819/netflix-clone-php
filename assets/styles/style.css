@@ -243,6 +243,7 @@ body {
     margin: 2rem 0;
     padding: 0 2rem;
     overflow-x: hidden;
+    overflow-y: hidden;
 
 }
 
@@ -264,7 +265,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
 
