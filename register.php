@@ -1,9 +1,21 @@
 <?php
 
+require_once("includes/classes/FormSanitaizer.php");
+
 if (isset($_POST["submit_button"])) {
-    // Register button was pressed
-    echo 'Register button was pressed';
+
+    $firstName = FormSanitaizer::sanitzaFormString($_POST["first_name"]);
+    $lastName = FormSanitaizer::sanitzaFormString($_POST["last_name"]);
+    $userName = FormSanitaizer::sanitzaFormUsername($_POST["user_name"]);
+    $email = FormSanitaizer::sanitzaFormEmail($_POST["email"]);
+    $confirmEmail = FormSanitaizer::sanitzaFormEmail($_POST["confirm_email"]);
+    $password = FormSanitaizer::sanitzaFormPassword($_POST["password"]);
+    $confirmPassword = FormSanitaizer::sanitzaFormPassword($_POST["confirm_password"]);
+
+    if ($email == $confirmEmail && $password == $confirmPassword) {
+    }
 }
+
 
 ?>
 
