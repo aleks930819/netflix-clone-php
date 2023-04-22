@@ -22,7 +22,7 @@ class PreviewProvider
      * Constructor
      * 
      *  @param $conn - database connection
-     *  @param $userLoggedInObj - user object
+     *  @param $username - user object
      * 
      */
     public function __construct($conn, $username)
@@ -55,7 +55,7 @@ class PreviewProvider
 
         return "<div class='preview_container'>
                     <img src='$thumbnail' class='preview_image' hidden>
-                    <video autoplay muted class='preview_video'>
+                    <video autoplay muted class='preview_video' onended='previewEnded()'>
                         <source src='$preview' type='video/mp4'>
                     </video>
                     <div class='preview_overlay'>
@@ -74,8 +74,29 @@ class PreviewProvider
 
 
 
+    /**
+     * 
+     *  
+     * 
+     * @param $entity - object 
+     * 
+     * @return string - html
+     */
 
+    public function createEntityPreviewSquare($entity): string
+    {
+        $id = $entity->getId();
+        $thumbnail = $entity->getThumbnail();
+        $name = $entity->getName();
 
+        return "<a href='entity.php?id=$id'>
+                <div class='preview_container small'>
+                 <img src='$thumbnail' title='$name' alt='$name'>
+                 </div>
+
+          </a> 
+        ";
+    }
 
 
 
@@ -88,16 +109,9 @@ class PreviewProvider
 
     private function getRandomEntity(): Entity
     {
-        $entity = null;
+        $entety = EntityProvider::getEntities($this->conn, null, 1);
 
-        $query = $this->conn->prepare("SELECT * FROM entities ORDER BY RAND() LIMIT 1");
 
-        $query->execute();
-
-        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-            $entity = new Entity($this->conn, $row);
-        }
-
-        return $entity;
+        return $entety[0];
     }
 }

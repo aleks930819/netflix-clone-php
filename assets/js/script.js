@@ -6,3 +6,8 @@ function volumeToggle(button) {
   $(button).find('i').toggleClass('fa-volume-mute');
   $(button).find('i').toggleClass('fa-volume-up');
 }
+
+function previewEnded() {
+  $('.preview_video').toggle();
+  $('.preview_image').toggle();
+}
