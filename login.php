@@ -29,31 +29,28 @@ if (isset($_POST["submit_button"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
+<?php require_once('includes/header.php'); ?>
 
-<head>
-    <title>Netflix</title>
-    <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
-</head>
 
-<body>
-    <div class="sign_in_container">
-        <div class="header">
-            <img src="assets/images/logo.png" title="Logo" alt="Site logo" />
-        </div>
+<div class="sign_in_container">
+    <div class="header">
+        <img src="assets/images/logo.png" title="Logo" alt="Site logo" />
+    </div>
 
-        <div class="column">
-            <form action="login.php" method="POST">
-                <h2>Sign In</h2>
-                <?php echo $account->getError(Constants::$loginFailed); ?>
-                <input type="text" name="user_name" placeholder="Username" required value="<?php GetInputValues::getinputValue("user_name"); ?>">
-                <input type="password" name="password" placeholder="Password" required value="<?php GetInputValues::getinputValue("password"); ?>">
+    <div class="column">
+        <form action="login.php" method="POST">
+            <h2>Sign In</h2>
+            <?php echo $account->getError(Constants::$loginFailed); ?>
+            <input type="text" name="user_name" placeholder="Username" required value="<?php GetInputValues::getinputValue("user_name"); ?>">
+            <input type="password" name="password" placeholder="Password" required value="<?php GetInputValues::getinputValue("password"); ?>">
 
-                <a href="register.php">Don't have an account? Sign up here.</a>
-                <button name="submit_button">Sign In</button>
-            </form>
-        </div>
-</body>
+            <a href="register.php">Don't have an account? Sign up here.</a>
+            <button name="submit_button">Sign In</button>
+        </form>
+    </div>
+    </body>
 
-</html>
+    </html>
+
+
+    <?php require_once('includes/footer.php'); ?>

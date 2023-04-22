@@ -32,43 +32,35 @@ if (isset($_POST["submit_button"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
+<?php require_once('includes/header.php'); ?>
 
-<head>
-    <title>Netflix</title>
-    <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
-</head>
+<div class="sign_in_container">
+    <div class="header">
+        <img src="assets/images/logo.png" title="Logo" alt="Site logo" />
+    </div>
 
-<body>
-    <div class="sign_in_container">
-        <div class="header">
-            <img src="assets/images/logo.png" title="Logo" alt="Site logo" />
-        </div>
+    <div class="column">
 
-        <div class="column">
+        <form action="register.php" method="POST">
+            <h2>Sign Up</h2>
 
-            <form action="register.php" method="POST">
-                <h2>Sign Up</h2>
+            <?php echo $account->getError(Constants::$firstNameCharacters); ?>
+            <input type="text" name="first_name" placeholder="First Name" required value="<?php GetInputValues::getinputValue("first_name"); ?>">
+            <?php echo $account->getError(Constants::$lastNameCharacters); ?>
+            <input type="text" name="last_name" placeholder="Last Name" required value="<?php GetInputValues::getinputValue("last_name"); ?>">
+            <?php echo $account->getError(Constants::$usernameCharacters); ?>
+            <input type="text" name="user_name" placeholder="Username" required value="<?php GetInputValues::getinputValue("user_name"); ?>">
+            <?php echo $account->getError(Constants::$emailsDontMatch); ?>
+            <?php echo $account->getError(Constants::$emailInvalid); ?>
+            <?php echo $account->getError(Constants::$emailTaken); ?>
+            <input type="email" name="email" placeholder="Email" required value="<?php GetInputValues::getinputValue("email"); ?>">
+            <input type=" email" name="confirm_email" placeholder="Confirm Email" required value="<?php GetInputValues::getinputValue("confirm_email"); ?>">
+            <?php echo $account->getError(Constants::$passwordsDontMatch); ?> <?php echo $account->getError(Constants::$passwordNotAlphanumeric); ?>
+            <input type=" password" name="password" placeholder="Password" required value="<?php GetInputValues::getinputValue("password"); ?>">
+            <input type=" password" name="confirm_password" placeholder="Confrim Password" required value="<?php GetInputValues::getinputValue("confirm_password"); ?>">
+            <a href=" login.php">Already have an account? Sign in here.</a>
+            <button name="submit_button">Sign Up</button>
+        </form>
+    </div>
 
-                <?php echo $account->getError(Constants::$firstNameCharacters); ?>
-                <input type="text" name="first_name" placeholder="First Name" required value="<?php GetInputValues::getinputValue("first_name"); ?>">
-                <?php echo $account->getError(Constants::$lastNameCharacters); ?>
-                <input type="text" name="last_name" placeholder="Last Name" required value="<?php GetInputValues::getinputValue("last_name"); ?>">
-                <?php echo $account->getError(Constants::$usernameCharacters); ?>
-                <input type="text" name="user_name" placeholder="Username" required value="<?php GetInputValues::getinputValue("user_name"); ?>">
-                <?php echo $account->getError(Constants::$emailsDontMatch); ?>
-                <?php echo $account->getError(Constants::$emailInvalid); ?>
-                <?php echo $account->getError(Constants::$emailTaken); ?>
-                <input type="email" name="email" placeholder="Email" required value="<?php GetInputValues::getinputValue("email"); ?>">
-                <input type=" email" name="confirm_email" placeholder="Confirm Email" required value="<?php GetInputValues::getinputValue("confirm_email"); ?>">
-                <?php echo $account->getError(Constants::$passwordsDontMatch); ?> <?php echo $account->getError(Constants::$passwordNotAlphanumeric); ?>
-                <input type=" password" name="password" placeholder="Password" required value="<?php GetInputValues::getinputValue("password"); ?>">
-                <input type=" password" name="confirm_password" placeholder="Confrim Password" required value="<?php GetInputValues::getinputValue("confirm_password"); ?>">
-                <a href=" login.php">Already have an account? Sign in here.</a>
-                <button name="submit_button">Sign Up</button>
-            </form>
-        </div>
-</body>
-
-</html>
+    <?php require_once('includes/footer.php'); ?>
