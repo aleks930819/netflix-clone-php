@@ -3,6 +3,8 @@
 require_once("includes/config.php");
 require_once("includes/classes/Account.php");
 require_once("includes/classes/FormSanitaizer.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/GetInputValues.php");
 
 $account = new Account($conn);
 
@@ -24,6 +26,7 @@ if (isset($_POST["submit_button"])) {
     }
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +46,10 @@ if (isset($_POST["submit_button"])) {
         <div class="column">
             <form action="login.php" method="POST">
                 <h2>Sign In</h2>
-                <input type="text" name="user_name" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <?php echo $account->getError(Constants::$loginFailed); ?>
+                <input type="text" name="user_name" placeholder="Username" required value="<?php GetInputValues::getinputValue("user_name"); ?>">
+                <input type="password" name="password" placeholder="Password" required value="<?php GetInputValues::getinputValue("password"); ?>">
+
                 <a href="register.php">Don't have an account? Sign up here.</a>
                 <button name="submit_button">Sign In</button>
             </form>
