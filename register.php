@@ -1,19 +1,24 @@
 <?php
 
+require_once("includes/config.php");
 require_once("includes/classes/FormSanitaizer.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/Account.php");
+
+$account = new Account($conn);
 
 if (isset($_POST["submit_button"])) {
 
     $firstName = FormSanitaizer::sanitzaFormString($_POST["first_name"]);
     $lastName = FormSanitaizer::sanitzaFormString($_POST["last_name"]);
-    $userName = FormSanitaizer::sanitzaFormUsername($_POST["user_name"]);
+    $username = FormSanitaizer::sanitzaFormUsername($_POST["user_name"]);
     $email = FormSanitaizer::sanitzaFormEmail($_POST["email"]);
     $confirmEmail = FormSanitaizer::sanitzaFormEmail($_POST["confirm_email"]);
     $password = FormSanitaizer::sanitzaFormPassword($_POST["password"]);
     $confirmPassword = FormSanitaizer::sanitzaFormPassword($_POST["confirm_password"]);
 
-    if ($email == $confirmEmail && $password == $confirmPassword) {
-    }
+
+    $account->register($firstName, $lastName, $username, $email, $confirmEmail, $password, $confirmPassword);
 }
 
 
@@ -37,6 +42,7 @@ if (isset($_POST["submit_button"])) {
 
             <form action="register.php" method="POST">
                 <h2>Sign Up</h2>
+
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <input type="text" name="user_name" placeholder="Username" required>
