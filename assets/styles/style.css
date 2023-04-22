@@ -16,4 +16,77 @@ body {
     font-size: 1.6rem;
     line-height: 1.5;
     background-color: #f3f3f3;
+    height: 100%;
+}
+
+.sign_in_container {
+    background-color: #efefee;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.column {
+    background-color: #fff;
+    min-height: 30rem;
+    max-height: 100%;
+    width: 45rem;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
+    border-radius: 1rem;
+
+}
+
+.column form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom:.5rem;
+}
+
+.column form input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.column form input:focus {
+    border: 1px solid #000;
+}
+
+.column form a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.column form button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #000;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.header {
+    width: 20%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header img {
+    width: 100%;
+    object-fit: cover;
 }
