@@ -216,3 +216,18 @@ body {
     white-space: nowrap;
 
 }
+
+.error_banner {
+    background-color: #f3f3f3;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_banner h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}

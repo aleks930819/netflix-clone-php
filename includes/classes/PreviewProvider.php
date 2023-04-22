@@ -102,9 +102,6 @@ class PreviewProvider
         ";
     }
 
-
-
-
     /** 
      *  Get a random entity
      * 

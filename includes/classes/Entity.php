@@ -79,4 +79,31 @@ class Entity
     {
         return $this->input["preview"];
     }
+
+    /**
+     *  Get the category of the entity
+     * 
+     *  @return array - category
+     */
+
+
+    public function getSeasons(): array
+    {
+
+        $query = $this->conn->prepare("SELECT * FROM videos WHERE entityId=:id AND isMovie=0 ORDER BY season, episode ASC");
+        $query->bindValue(":id", $entity->getId());
+        $query->execute();
+
+        $seasons = [];
+        $videos = [];
+        $currentSeason = null;
+
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $currentSeason = $row["season"];
+            $videos[] = new Video($this->conn, $row);
+
+        }
+
+        return $currentSeason;
+    }
 }
