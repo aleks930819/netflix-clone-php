@@ -92,7 +92,7 @@ class Account
             return;
         }
 
-        $query = $this->conn->prepare("SELECT * FROM users WHERE username = :username");
+        $query = $this->conn->prepare("SELECT * FROM user WHERE user_name = :username");
         $query->bindValue(":username", $username);
         $query->execute();
 
@@ -122,7 +122,7 @@ class Account
             return;
         }
 
-        $query = $this->conn->prepare("SELECT * FROM users WHERE email=:email");
+        $query = $this->conn->prepare("SELECT * FROM user WHERE email=:email");
         $query->bindValue(":email", $email);
 
         $query->execute();
@@ -169,13 +169,12 @@ class Account
      * @return array
      */
 
-    public function getError($err): array
+    public function getError($err): string
     {
         if (in_array($err, $this->errorArray)) {
-            return $this->errorArray;
+            return "<span class='error_message'>$err</span>";
         }
-
-        return [];
+        return '';
     }
 
     /**
@@ -189,16 +188,51 @@ class Account
      * @param string $password
      * @param string $confirmPassword
      * 
-     * @return void
+     * @return bool
      */
 
 
-    public function register(string $firstName, string $lastName, string $username, string $email, string $confirmEmail, string $password, string $confirmPassword): void
+    public function register(string $firstName, string $lastName, string $username, string $email, string $confirmEmail, string $password, string $confirmPassword): bool
     {
         $this->validateFirstName($firstName);
         $this->validateLastName($lastName);
         $this->validateUsername($username);
         $this->validateEmails($email, $confirmEmail);
         $this->validatePasswords($password, $confirmPassword);
+
+        if (empty($this->errorArray)) {
+            return $this->insertUserDetails($firstName,  $lastName,  $username, $email, $password);
+        }
+
+        return false;
+    }
+
+    /**
+     *  Insert user details to the database
+     * 
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * 
+     * @return bool
+     */
+
+    private function insertUserDetails(string $firstName, string $lastName, string $username, string $email, string $password): bool
+    {
+        $password = hash("sha512", $password);
+        $profilePic = "assets/images/profile-pics/head_emerald.png";
+        $date = date("Y-m-d");
+
+        $query = $this->conn->prepare("INSERT INTO user (first_name, last_name, user_name, email, password, sign_up_date) VALUES (:firstName, :lastName, :username, :email, :password, :date)");
+        $query->bindValue(":firstName", $firstName);
+        $query->bindValue(":lastName", $lastName);
+        $query->bindValue(":username", $username);
+        $query->bindValue(":email", $email);
+        $query->bindValue(":password", $password);
+        $query->bindValue(":date", $date);
+
+        return $query->execute();
     }
 }

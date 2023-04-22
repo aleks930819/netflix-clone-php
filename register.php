@@ -18,7 +18,13 @@ if (isset($_POST["submit_button"])) {
     $confirmPassword = FormSanitaizer::sanitzaFormPassword($_POST["confirm_password"]);
 
 
-    $account->register($firstName, $lastName, $username, $email, $confirmEmail, $password, $confirmPassword);
+    $success = $account->register($firstName, $lastName, $username, $email, $confirmEmail, $password, $confirmPassword);
+
+    if ($success) {
+        // Store session
+        $_SESSION["userLoggedIn"] = $username;
+        header("Location: index.php");
+    }
 }
 
 
@@ -43,11 +49,19 @@ if (isset($_POST["submit_button"])) {
             <form action="register.php" method="POST">
                 <h2>Sign Up</h2>
 
+                <?php echo $account->getError(Constants::$firstNameCharacters); ?>
                 <input type="text" name="first_name" placeholder="First Name" required>
+                <?php echo $account->getError(Constants::$lastNameCharacters); ?>
                 <input type="text" name="last_name" placeholder="Last Name" required>
+                <?php echo $account->getError(Constants::$usernameCharacters); ?>
                 <input type="text" name="user_name" placeholder="Username" required>
+                <?php echo $account->getError(Constants::$emailsDontMatch); ?>
+                <?php echo $account->getError(Constants::$emailInvalid); ?>
+                <?php echo $account->getError(Constants::$emailTaken); ?>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="email" name="confirm_email" placeholder="Confirm Email" required>
+                <?php echo $account->getError(Constants::$passwordsDontMatch); ?>
+                <?php echo $account->getError(Constants::$passwordNotAlphanumeric); ?>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="confirm_password" placeholder="Confrim Password" required>
                 <a href="login.php">Already have an account? Sign in here.</a>
